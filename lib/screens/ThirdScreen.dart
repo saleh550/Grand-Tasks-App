@@ -1,31 +1,40 @@
 // screens/home_screen.dart
 import 'package:flutter/material.dart';
 
-class Task3Screen extends StatefulWidget  {
+class ThirdScreen extends StatefulWidget  {
   @override
 _Task3ScreenState createState()=>_Task3ScreenState();
 }
-class _Task3ScreenState extends State<Task3Screen> {
+class _Task3ScreenState extends State<ThirdScreen> {
   List<int> numbers = [];
+  int currentNumber = 0;
   bool isProcessing = false;
-
+  bool isEvenTurn = true;
   // Even numbers
   Future<void> generateEvenNumbers() async {
     for (int i = 0; i < 100; i += 2) {
+      while (!isEvenTurn) {
+        await Future.delayed(Duration(milliseconds: 10));
+      }
       await Future.delayed(Duration(milliseconds: 500));
       setState(() {
-        numbers.add(i);
+        currentNumber=i;
       });
+      isEvenTurn = false;
     }
   }
 
   // Odd numbers
   Future<void> generateOddNumbers() async {
     for (int i = 1; i < 100; i += 2) {
+      while (isEvenTurn) {
+        await Future.delayed(Duration(milliseconds: 10));
+      }
       await Future.delayed(Duration(milliseconds: 500));
       setState(() {
-        numbers.add(i);
+        currentNumber=i;
       });
+      isEvenTurn = true;
     }
   }
 
@@ -33,7 +42,7 @@ class _Task3ScreenState extends State<Task3Screen> {
     if (isProcessing) return;
 
     setState(() {
-      numbers.clear();
+      currentNumber = 0;
       isProcessing = true;
     });
 
@@ -50,23 +59,22 @@ class _Task3ScreenState extends State<Task3Screen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ElevatedButton(
-          onPressed: startProcess,
-          child: Text('Start Process'),
-        ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: numbers.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(numbers[index].toString()),
-              );
-            },
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            onPressed: startProcess,
+            child: Text('Start Process'),
           ),
-        ),
-      ],
+          SizedBox(height: 24),
+          Text(
+            '$currentNumber',
+            style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
     );
   }
+
 }

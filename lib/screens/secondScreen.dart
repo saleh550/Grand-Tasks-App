@@ -1,11 +1,11 @@
 // screens/home_screen.dart
 import 'package:flutter/material.dart';
 
-class Task2Screen extends StatefulWidget  {
+class SecondScreen extends StatefulWidget  {
   @override
   _Task2ScreenState createState() => _Task2ScreenState();
 }
-class _Task2ScreenState extends State<Task2Screen> {
+class _Task2ScreenState extends State<SecondScreen> {
   final TextEditingController _controller = TextEditingController();
   String _displayText = '';
 

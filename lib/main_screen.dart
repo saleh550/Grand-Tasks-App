@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
-import 'screens/task_2_screen.dart';
-import 'screens/task_3_screen.dart';
+import 'screens/secondScreen.dart';
+import 'screens/ThirdScreen.dart';
 
 class MainScreen extends StatelessWidget {
   @override
@@ -22,8 +22,8 @@ class MainScreen extends StatelessWidget {
         body: TabBarView(
           children: [
             HomeScreen(),
-            Task2Screen(),
-            Task3Screen(),
+            SecondScreen(),
+            ThirdScreen(),
           ],
         ),
       ),
